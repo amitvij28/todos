@@ -31,7 +31,7 @@ interface ITodoState {
 
 export const todos = createContext<{
     state: ITodoState;
-    dispatch: React.Dispatch<any>;
+    dispatch: React.Dispatch<ITodoAction>;
 }>({ state: { todos: [], idCount: 0 }, dispatch: () => null });
 
 interface ITodoAction {
