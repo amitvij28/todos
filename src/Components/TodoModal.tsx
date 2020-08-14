@@ -27,7 +27,7 @@ const TodoModal: FC<{
     const allTags = useContext(tagState);
     const { state: allTodos, dispatch } = useContext(todos);
 
-    const { data, open, handleClose } = props;
+    const { data, open, handleClose, mode } = props;
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [schedule, setSchedule] = useState(new Date());
@@ -64,10 +64,16 @@ const TodoModal: FC<{
             status,
             tags,
             members,
-            id: allTodos.idCount++,
+            id: mode === "edit" && data ? data.id : allTodos.idCount++,
         };
 
-        dispatch({ type: TodoActions.ADD_TODO, payload: newTodo });
+        dispatch({
+            type:
+                props.mode === "add"
+                    ? TodoActions.ADD_TODO
+                    : TodoActions.EDIT_TODO,
+            payload: newTodo,
+        });
         handleClose();
     };
 
@@ -143,14 +149,14 @@ const TodoModal: FC<{
                                 setStatus(e.target.value as string)
                             }
                         >
+                            <MenuItem value={TodoStatus.tbd}>
+                                {TodoStatus.tbd}
+                            </MenuItem>
                             <MenuItem value={TodoStatus.doing}>
                                 {TodoStatus.doing}
                             </MenuItem>
                             <MenuItem value={TodoStatus.done}>
                                 {TodoStatus.done}
-                            </MenuItem>
-                            <MenuItem value={TodoStatus.tbd}>
-                                {TodoStatus.tbd}
                             </MenuItem>
                         </Select>
                         <InputLabel id="members-label">Members</InputLabel>

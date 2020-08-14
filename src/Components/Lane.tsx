@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { ITodo } from "../Context/TodoProvider";
 import { Typography, Grid } from "@material-ui/core";
+import DisplayCard from "./DisplayCard";
 
 interface ILaneProps {
     todoList: ITodo[];
@@ -19,7 +20,7 @@ const Lane: FC<ILaneProps> = (props) => {
                     <Grid container>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={10}>
-                            {t.title}
+                            <DisplayCard todo={t} />
                         </Grid>
                         <Grid item xs={1}></Grid>
                     </Grid>
