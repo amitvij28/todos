@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, FC } from "react";
 
-interface IMember {
+export interface IMember {
     name: string;
     id: number;
 }
@@ -10,9 +10,9 @@ interface IMemberState {
     idCount: number;
 }
 
-const memberState = createContext<{
+export const memberState = createContext<{
     state: IMemberState;
-    dispatch: React.Dispatch<any>;
+    dispatch: React.Dispatch<IMemberAction>;
 }>({ state: { members: [], idCount: 0 }, dispatch: () => null });
 
 interface IMemberAction {
