@@ -1,10 +1,33 @@
-import React, { useContext } from "react";
-import { todos } from "../Context/TodoProvider";
+import React, { FC } from "react";
+import { ITodo } from "../Context/TodoProvider";
+import { Typography, Grid } from "@material-ui/core";
 
-const Lane = () => {
-    const tds = useContext(todos);
+interface ILaneProps {
+    todoList: ITodo[];
+    heading: string;
+}
 
-    return <div>Lane</div>;
+const Lane: FC<ILaneProps> = (props) => {
+    return (
+        <>
+            <Typography variant="h5" style={{ textAlign: "center" }}>
+                {props.heading}
+            </Typography>
+            <br />
+            {props.todoList.map((t) => (
+                <>
+                    <Grid container>
+                        <Grid item xs={1}></Grid>
+                        <Grid item xs={10}>
+                            {t.title}
+                        </Grid>
+                        <Grid item xs={1}></Grid>
+                    </Grid>
+                    <br />
+                </>
+            ))}
+        </>
+    );
 };
 
 export default Lane;
