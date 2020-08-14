@@ -1,4 +1,6 @@
 import React, { createContext, FC, useReducer } from "react";
+import { IMember } from "./MembersProvider";
+import { ITag } from "./TagsProvider";
 
 export const TodoStatus = {
     done: "Done",
@@ -16,10 +18,10 @@ export interface ITodo {
     title: string;
     description: string;
     schedule: Date;
-    tags: string[];
+    tags: ITag[];
     status: string;
     id: number;
-    members: string[];
+    members: IMember[];
 }
 
 interface ITodoState {
@@ -46,7 +48,7 @@ const todoReducer = (state: ITodoState, action: ITodoAction) => {
             };
         case TodoActions.DEL_TODO:
             return {
-                todos: state.todos.filter((t) => t.id === action.payload.id),
+                todos: state.todos.filter((t) => t.id !== action.payload.id),
                 idCount: state.idCount,
             };
         case TodoActions.EDIT_TODO:
