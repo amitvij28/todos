@@ -75,7 +75,11 @@ const DisplayCard: FC<ICardProps> = (props) => {
                         ) : null}
                         <Grid item xs={12}>
                             {tags.map((t) => (
-                                <Chip label={t.label} style={{ margin: 1 }} />
+                                <Chip
+                                    key={t.id}
+                                    label={t.label}
+                                    style={{ margin: 1 }}
+                                />
                             ))}
                         </Grid>
                     </Grid>

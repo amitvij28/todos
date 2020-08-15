@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Component should render 1`] = `
+<Fragment>
+  <div
+    className="makeStyles-root-1"
+  >
+    <OptionPanel />
+    <br />
+    <div>
+      <DisplayPanel />
+    </div>
+  </div>
+</Fragment>
+`;

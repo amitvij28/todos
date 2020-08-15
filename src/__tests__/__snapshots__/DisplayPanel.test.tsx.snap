@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Display Panel should render 1`] = `
+<DndProvider
+  backend={[Function]}
+>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+  >
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      xs={4}
+    >
+      <Lane
+        heading="To Be Done"
+        todoList={Array []}
+        type="To Be Done"
+      />
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      xs={4}
+    >
+      <Lane
+        heading="Doing"
+        todoList={Array []}
+        type="Doing"
+      />
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      xs={4}
+    >
+      <Lane
+        heading="Done"
+        todoList={Array []}
+        type="Done"
+      />
+    </WithStyles(ForwardRef(Grid))>
+  </WithStyles(ForwardRef(Grid))>
+</DndProvider>
+`;

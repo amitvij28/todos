@@ -4,7 +4,7 @@ import { Typography, Grid } from "@material-ui/core";
 import { useDrop, DragObjectWithType } from "react-dnd";
 import DisplayCard from "./DisplayCard";
 
-interface ILaneProps {
+export interface ILaneProps {
     todoList: ITodo[];
     heading: string;
     type: string;
@@ -31,7 +31,7 @@ const Lane: FC<ILaneProps> = (props) => {
             </Typography>
             <br />
             {props.todoList.map((t) => (
-                <>
+                <div key={t.id}>
                     <Grid container>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={10}>
@@ -40,7 +40,7 @@ const Lane: FC<ILaneProps> = (props) => {
                         <Grid item xs={1}></Grid>
                     </Grid>
                     <br />
-                </>
+                </div>
             ))}
         </div>
     );
