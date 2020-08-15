@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useDrag } from "react-dnd";
 import TodoModal from "./TodoModal";
 import moment from "moment";
 
@@ -26,9 +27,19 @@ const DisplayCard: FC<ICardProps> = (props) => {
         dispatch({ type: TodoActions.DEL_TODO, payload: props.todo });
     };
 
+    const [{ isDragging }, dragRef] = useDrag({
+        item: {
+            type: "TODO",
+            todo: props.todo,
+        },
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
+    });
+
     return (
         <>
-            <Card>
+            <Card ref={dragRef} style={{ opacity: isDragging ? 0.5 : 1 }}>
                 <CardContent>
                     <Grid container>
                         <Grid item xs={9}>
