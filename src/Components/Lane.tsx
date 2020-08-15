@@ -19,14 +19,19 @@ const Lane: FC<ILaneProps> = (props) => {
             isOn: monitor.isOver(),
         }),
         drop: (item: { todo: ITodo } & DragObjectWithType) => {
+            if (item.todo.status === props.type) return;
             item.todo.status = props.type;
+
             dispatch({ type: TodoActions.EDIT_TODO, payload: item.todo });
         },
     });
 
     return (
-        <div ref={dropRef}>
-            <Typography variant="h5" style={{ textAlign: "center" }}>
+        <div
+            ref={dropRef}
+            style={{ height: "100%", background: isOn ? "#d8d3cd" : "" }}
+        >
+            <Typography variant="h4" style={{ textAlign: "center" }}>
                 {props.heading}
             </Typography>
             <br />

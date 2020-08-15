@@ -3,7 +3,7 @@ import TodoProvider from "./Context/TodoProvider";
 import Home from "./Components/Home";
 import MembersProvider from "./Context/MembersProvider";
 import TagsProvider from "./Context/TagsProvider";
-
+import "./app.css";
 function App() {
     return (
         <TodoProvider>

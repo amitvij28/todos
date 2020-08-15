@@ -10,7 +10,7 @@ const DisplayPanel = () => {
 
     return (
         <DndProvider backend={HTML5Backend}>
-            <Grid container spacing={2}>
+            <Grid container>
                 <Grid item xs={4}>
                     <Lane
                         todoList={state.todos.filter(

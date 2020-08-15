@@ -1,24 +1,25 @@
 import React from "react";
-import { Grid, Divider } from "@material-ui/core";
+import { Grid, Divider, makeStyles } from "@material-ui/core";
 import OptionPanel from "./OptionPanel";
 import DisplayPanel from "./DisplayPanel";
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        background: "#f7f2e7",
+        height: "100vh",
+    },
+}));
+
 const Home = () => {
+    const classes = useStyles();
     return (
         <>
-            <div>
-                {" "}
-                <Grid container>
-                    <Grid item xs={12}>
-                        <OptionPanel />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <br />
-                        <Divider />
-                        <br />
-                    </Grid>
-                </Grid>
-                <DisplayPanel />
+            <div className={classes.root}>
+                <OptionPanel />
+                <br />
+                <div>
+                    <DisplayPanel />
+                </div>
             </div>
         </>
     );
