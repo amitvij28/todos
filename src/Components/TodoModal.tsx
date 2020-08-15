@@ -9,12 +9,19 @@ import {
     MenuItem,
     InputLabel,
     Chip,
+    makeStyles,
 } from "@material-ui/core";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { ITodo, TodoStatus, todos, TodoActions } from "../Context/TodoProvider";
 import { IMember, memberState } from "../Context/MembersProvider";
 import { ITag, tagState } from "../Context/TagsProvider";
+
+const useStyle = makeStyles((theme) => ({
+    inputs: {
+        margin: 10,
+    },
+}));
 
 const TodoModal: FC<{
     open: boolean;
@@ -35,6 +42,8 @@ const TodoModal: FC<{
     const [tags, setTags] = useState<ITag[]>([]);
     const [members, setMembers] = useState<IMember[]>([]);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    const classes = useStyle();
 
     useEffect(() => {
         if (data) {
@@ -109,7 +118,7 @@ const TodoModal: FC<{
                 style={{ minWidth: "70%" }}
             >
                 <DialogTitle>{props.title}</DialogTitle>
-                <DialogContent>
+                <DialogContent dividers={true}>
                     <form onSubmit={onSubmit}>
                         <TextField
                             margin="dense"
@@ -121,28 +130,38 @@ const TodoModal: FC<{
                             }
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
+                            className={classes.inputs}
                         />
                         <TextField
                             multiline
                             label="Description"
                             fullWidth
+                            className={classes.inputs}
                             rows={3}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
+
                         <DateTimePicker
                             variant="inline"
                             label="Schedule at"
                             value={schedule}
+                            className={classes.inputs}
                             onChange={(d) =>
                                 d ? setSchedule(d.toDate()) : null
                             }
                             fullWidth
                             disablePast
                         />
-                        <InputLabel id="status-label">Status</InputLabel>
+                        <InputLabel
+                            id="status-label"
+                            className={classes.inputs}
+                        >
+                            Status
+                        </InputLabel>
                         <Select
                             labelId="status-label"
+                            className={classes.inputs}
                             value={status}
                             fullWidth
                             onChange={(e) =>
@@ -159,8 +178,14 @@ const TodoModal: FC<{
                                 {TodoStatus.done}
                             </MenuItem>
                         </Select>
-                        <InputLabel id="members-label">Members</InputLabel>
+                        <InputLabel
+                            id="members-label"
+                            className={classes.inputs}
+                        >
+                            Members
+                        </InputLabel>
                         <Select
+                            className={classes.inputs}
                             multiple
                             labelId="members-label"
                             value={members.map((m) => m.id)}
@@ -185,8 +210,11 @@ const TodoModal: FC<{
                             ))}
                         </Select>
 
-                        <InputLabel id="tags-label">Tags</InputLabel>
+                        <InputLabel id="tags-label" className={classes.inputs}>
+                            Tags
+                        </InputLabel>
                         <Select
+                            className={classes.inputs}
                             multiple
                             labelId="tags-label"
                             value={tags.map((t) => t.id)}
@@ -212,6 +240,7 @@ const TodoModal: FC<{
                         </Select>
 
                         <Button
+                            className={classes.inputs}
                             variant="contained"
                             color="primary"
                             type="submit"

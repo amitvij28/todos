@@ -49,17 +49,19 @@ const DisplayCard: FC<ICardProps> = (props) => {
                                 {description}
                             </Typography>
                         </Grid>
+
                         <Grid item xs={12}>
                             <Typography variant="body2">{`Scheduled: ${moment(
                                 schedule
                             ).format("DD-MM-YYYY, hh:mm a")}`}</Typography>
                         </Grid>
-
-                        <Grid item xs={12}>
-                            <Typography variant="body2">{`Members: ${members
-                                .map((m) => m.name)
-                                .join(", ")}`}</Typography>
-                        </Grid>
+                        {members.length ? (
+                            <Grid item xs={12}>
+                                <Typography variant="body2">{`Members: ${members
+                                    .map((m) => m.name)
+                                    .join(", ")}`}</Typography>
+                            </Grid>
+                        ) : null}
                         <Grid item xs={12}>
                             {tags.map((t) => (
                                 <Chip label={t.label} style={{ margin: 1 }} />
