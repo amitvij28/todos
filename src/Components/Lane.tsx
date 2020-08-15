@@ -1,5 +1,5 @@
 import React, { FC, useContext } from "react";
-import { ITodo, todos, TodoActions } from "../Context/TodoProvider";
+import { ITodo, todos } from "../Context/TodoProvider";
 import { Typography, Grid } from "@material-ui/core";
 import { useDrop, DragObjectWithType } from "react-dnd";
 import DisplayCard from "./DisplayCard";
@@ -11,7 +11,7 @@ export interface ILaneProps {
 }
 
 const Lane: FC<ILaneProps> = (props) => {
-    const { dispatch } = useContext(todos);
+    const { editTodos } = useContext(todos);
 
     const [{ isOn }, dropRef] = useDrop({
         accept: "TODO",
@@ -21,8 +21,7 @@ const Lane: FC<ILaneProps> = (props) => {
         drop: (item: { todo: ITodo } & DragObjectWithType) => {
             if (item.todo.status === props.type) return;
             item.todo.status = props.type;
-
-            dispatch({ type: TodoActions.EDIT_TODO, payload: item.todo });
+            editTodos([item.todo]);
         },
     });
 

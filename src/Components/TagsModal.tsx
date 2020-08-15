@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import { tagState, ITag, tagActions } from "../Context/TagsProvider";
+import { tagState, ITag } from "../Context/TagsProvider";
 
 interface ITMProps {
     open: boolean;
@@ -25,7 +25,7 @@ interface ITMProps {
 }
 
 const TagsModal: FC<ITMProps> = (props) => {
-    const { state, dispatch } = useContext(tagState);
+    const { state, addTag, deleteTag } = useContext(tagState);
     const [tag, setTag] = useState("");
 
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -43,11 +43,7 @@ const TagsModal: FC<ITMProps> = (props) => {
             id: state.idCount,
         };
         setTag("");
-        dispatch({ type: tagActions.ADD_TAG, payload: newTag });
-    };
-
-    const deleteTag = (t: ITag) => {
-        dispatch({ type: tagActions.DEL_TAG, payload: t });
+        addTag(newTag);
     };
 
     return (

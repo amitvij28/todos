@@ -1,5 +1,5 @@
 import React, { FC, useState, useContext } from "react";
-import { ITodo, todos, TodoActions } from "../Context/TodoProvider";
+import { ITodo, todos } from "../Context/TodoProvider";
 import {
     Card,
     CardContent,
@@ -22,10 +22,7 @@ const DisplayCard: FC<ICardProps> = (props) => {
     const { title, description, schedule, members, tags } = props.todo;
 
     const [todoForm, setTodoForm] = useState(false);
-    const { dispatch } = useContext(todos);
-    const deleteTodo = () => {
-        dispatch({ type: TodoActions.DEL_TODO, payload: props.todo });
-    };
+    const { delTodos } = useContext(todos);
 
     const [{ isDragging }, dragRef] = useDrag({
         item: {
@@ -48,7 +45,9 @@ const DisplayCard: FC<ICardProps> = (props) => {
                         <Grid item xs={3}>
                             <CardActions>
                                 <EditIcon onClick={() => setTodoForm(true)} />
-                                <DeleteIcon onClick={deleteTodo} />
+                                <DeleteIcon
+                                    onClick={() => delTodos([props.todo])}
+                                />
                             </CardActions>
                         </Grid>
                         <Grid item xs={12}>

@@ -15,11 +15,7 @@ import {
     TableBody,
     TableRow,
 } from "@material-ui/core";
-import {
-    memberState,
-    IMember,
-    MemberActions,
-} from "../Context/MembersProvider";
+import { memberState, IMember } from "../Context/MembersProvider";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -29,7 +25,7 @@ interface IMMProps {
 }
 
 const MembersModal: FC<IMMProps> = (props) => {
-    const { state, dispatch } = useContext(memberState);
+    const { state, addMember, deleteMember } = useContext(memberState);
     const [name, setName] = useState("");
 
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -47,11 +43,7 @@ const MembersModal: FC<IMMProps> = (props) => {
             id: state.idCount,
         };
         setName("");
-        dispatch({ type: MemberActions.ADD_MEMBER, payload: newMember });
-    };
-
-    const deleteMember = (m: IMember) => {
-        dispatch({ type: MemberActions.DEL_MEMBER, payload: m });
+        addMember(newMember);
     };
 
     return (

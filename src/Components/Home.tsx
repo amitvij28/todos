@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Divider, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import OptionPanel from "./OptionPanel";
 import DisplayPanel from "./DisplayPanel";
 

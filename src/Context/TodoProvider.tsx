@@ -31,30 +31,43 @@ interface ITodoState {
 
 export const todos = createContext<{
     state: ITodoState;
-    dispatch: React.Dispatch<ITodoAction>;
-}>({ state: { todos: [], idCount: 0 }, dispatch: () => null });
+    addTodos: (t: ITodo[]) => void;
+    delTodos: (t: ITodo[]) => void;
+    editTodos: (t: ITodo[]) => void;
+}>({
+    state: { todos: [], idCount: 0 },
+    addTodos: (t) => null,
+    delTodos: (t) => null,
+    editTodos: (t) => null,
+});
 
 interface ITodoAction {
     type: string;
-    payload: ITodo;
+    payload: ITodo[];
 }
 
 const todoReducer = (state: ITodoState, action: ITodoAction) => {
-    switch (action.type) {
+    const { type, payload } = action;
+    switch (type) {
         case TodoActions.ADD_TODO:
             return {
-                todos: [...state.todos, action.payload],
-                idCount: state.idCount + 1,
+                todos: [...state.todos, ...payload],
+                idCount: state.idCount + payload.length,
             };
         case TodoActions.DEL_TODO:
+            const delIds = payload.map((t) => t.id);
             return {
-                todos: state.todos.filter((t) => t.id !== action.payload.id),
+                todos: state.todos.filter((t) => !delIds.includes(t.id)),
                 idCount: state.idCount,
             };
         case TodoActions.EDIT_TODO:
+            const editIds = payload.map((t) => t.id);
             return {
                 todos: state.todos.map((m) => {
-                    if (m.id === action.payload.id) return action.payload;
+                    if (editIds.includes(m.id)) {
+                        const i = editIds.indexOf(m.id);
+                        return payload[i];
+                    }
                     return m;
                 }),
                 idCount: state.idCount,
@@ -71,8 +84,19 @@ const TodoProvider: FC<{ children: React.ReactNode }> = (props) => {
         idCount: 0,
     });
 
+    const addTodos = (todo: ITodo[]) => {
+        dispatch({ type: TodoActions.ADD_TODO, payload: todo });
+    };
+
+    const delTodos = (todo: ITodo[]) => {
+        dispatch({ type: TodoActions.DEL_TODO, payload: todo });
+    };
+    const editTodos = (todo: ITodo[]) => {
+        dispatch({ type: TodoActions.EDIT_TODO, payload: todo });
+    };
+
     return (
-        <todos.Provider value={{ state, dispatch }}>
+        <todos.Provider value={{ state, addTodos, delTodos, editTodos }}>
             {props.children}
         </todos.Provider>
     );

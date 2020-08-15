@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
-import { ITodo, TodoStatus, todos, TodoActions } from "../Context/TodoProvider";
+import { ITodo, TodoStatus, todos } from "../Context/TodoProvider";
 import { IMember, memberState } from "../Context/MembersProvider";
 import { ITag, tagState } from "../Context/TagsProvider";
 
@@ -32,7 +32,7 @@ const TodoModal: FC<{
 }> = (props) => {
     const allMembers = useContext(memberState);
     const allTags = useContext(tagState);
-    const { state: allTodos, dispatch } = useContext(todos);
+    const { state: allTodos, addTodos, editTodos } = useContext(todos);
 
     const { data, open, handleClose, mode } = props;
     const [title, setTitle] = useState("");
@@ -76,13 +76,11 @@ const TodoModal: FC<{
             id: mode === "edit" && data ? data.id : allTodos.idCount,
         };
 
-        dispatch({
-            type:
-                props.mode === "add"
-                    ? TodoActions.ADD_TODO
-                    : TodoActions.EDIT_TODO,
-            payload: newTodo,
-        });
+        if (mode === "add") {
+            addTodos([newTodo]);
+        } else {
+            editTodos([newTodo]);
+        }
         handleClose();
     };
 
