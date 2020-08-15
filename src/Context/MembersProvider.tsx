@@ -30,7 +30,7 @@ const memberReducer = (state: IMemberState, action: IMemberAction) => {
         case MemberActions.ADD_MEMBER:
             return {
                 members: [action.payload, ...state.members],
-                idCount: state.idCount++,
+                idCount: state.idCount + 1,
             };
         case MemberActions.DEL_MEMBER:
             return {

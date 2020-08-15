@@ -40,7 +40,7 @@ const TagsModal: FC<ITMProps> = (props) => {
 
         const newTag: ITag = {
             label: tag,
-            id: state.idCount++,
+            id: state.idCount,
         };
         setTag("");
         dispatch({ type: tagActions.ADD_TAG, payload: newTag });

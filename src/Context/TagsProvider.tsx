@@ -37,7 +37,7 @@ const tagReducer = (state: ITagState, action: ITagAction) => {
         case tagActions.ADD_TAG:
             return {
                 tags: [payload, ...state.tags],
-                idCount: state.idCount++,
+                idCount: state.idCount + 1,
             };
         case tagActions.DEL_TAG:
             return {

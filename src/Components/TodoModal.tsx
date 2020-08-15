@@ -73,7 +73,7 @@ const TodoModal: FC<{
             status,
             tags,
             members,
-            id: mode === "edit" && data ? data.id : allTodos.idCount++,
+            id: mode === "edit" && data ? data.id : allTodos.idCount,
         };
 
         dispatch({

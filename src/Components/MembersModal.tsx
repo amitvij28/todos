@@ -44,7 +44,7 @@ const MembersModal: FC<IMMProps> = (props) => {
 
         const newMember: IMember = {
             name,
-            id: state.idCount++,
+            id: state.idCount,
         };
         setName("");
         dispatch({ type: MemberActions.ADD_MEMBER, payload: newMember });

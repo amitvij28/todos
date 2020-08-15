@@ -44,7 +44,7 @@ const todoReducer = (state: ITodoState, action: ITodoAction) => {
         case TodoActions.ADD_TODO:
             return {
                 todos: [...state.todos, action.payload],
-                idCount: state.idCount++,
+                idCount: state.idCount + 1,
             };
         case TodoActions.DEL_TODO:
             return {
